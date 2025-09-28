@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/_layout :: layout(title='Página Inicial', content=~{::content}, pageScripts=~{})}">
+
+<th:block th:fragment="content">
+    <main class="container flex-grow-1 my-5">
+        <div class="text-center">
+            <h1 class="display-4 fw-bold">Bem-vindo ao <span style="color: var(--mottu-green);">GeoMottu</span>!</h1>
+            <p class="lead">Sua plataforma central para gerenciamento de frotas.</p>
+        </div>
+        <div class="row mt-5 g-4 justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="card-custom h-100">
+                    <div class="card-body text-center d-flex flex-column">
+                        <i class="bi bi-p-circle-fill display-1" style="color: var(--mottu-green);"></i>
+                        <h4 class="card-title mt-3">Gerenciar Pátios</h4>
+                        <p class="card-text">Visualize e administre os pátios de estacionamento.</p>
+                        <a th:href="@{/patios}" class="btn btn-outline-mottu mt-auto">Acessar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card-custom h-100">
+                    <div class="card-body text-center d-flex flex-column">
+                        <i class="bi bi-bicycle display-1" style="color: var(--mottu-green);"></i>
+                        <h4 class="card-title mt-3">Gerenciar Motos</h4>
+                        <p class="card-text">Cadastre, edite e controle o status das motos da frota.</p>
+                        <a th:href="@{/motos}" class="btn btn-outline-mottu mt-auto">Acessar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4" sec:authorize="hasRole('ADMIN')">
+                <div class="card-custom h-100">
+                    <div class="card-body text-center d-flex flex-column">
+                        <i class="bi bi-bar-chart-line-fill display-1" style="color: var(--mottu-green);"></i>
+                        <h4 class="card-title mt-3">Dashboard Admin</h4>
+                        <p class="card-text">Veja dados e estatísticas gerais do sistema.</p>
+                        <a th:href="@{/admin/dashboard}" class="btn btn-outline-mottu mt-auto">Acessar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</th:block>
+</html>

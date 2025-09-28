@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/_layout :: layout(title='Editar Perfil', content=~{::content}, pageScripts=~{})}">
+
+<th:block th:fragment="content">
+    <main class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class.="d-flex align-items-center mb-4">
+                    <a th:href="@{/usuarios/perfil}" class="btn btn-outline-mottu me-3"><i class="bi bi-arrow-left"></i></a>
+                    <h1 class="display-5 fw-bold mb-0">Editar Perfil</h1>
+                </div>
+
+                <div class="card-custom">
+                    <div class="card-body p-4">
+                        <form th:action="@{/usuarios/{id}/editar(id=${usuario.id})}"
+                              th:object="${usuarioDto}" method="post">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome de Usuário</label>
+                                <input type="text" class="form-control" id="nome" th:field="*{nome}" required>
+                                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="senha" class="form-label">Nova Senha</label>
+                                <input type="password" class="form-control" id="senha" th:field="*{senha}" placeholder="Deixe em branco para não alterar">
+                                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}"></div>
+                            </div>
+
+                            <div sec:authorize="hasRole('ADMIN')">
+                                <hr class="my-4">
+                                <h5 style="color: var(--mottu-green)">Configurações de Administrador</h5>
+
+                                <div class="mb-3">
+                                    <label for="tipoPerfil" class="form-label">Perfil (Role)</label>
+                                    <select id="tipoPerfil" class="form-select" th:field="*{tipoPerfil}"
+                                            th:disabled="${usuario.id == #authentication.principal.id}">
+                                        <option value="1">ADMIN</option>
+                                        <option value="2">USER</option>
+                                    </select>
+                                    <small th:if="${usuario.id == #authentication.principal.id}" class="form-text text-warning">
+                                        Não é possível alterar seu próprio perfil via este formulário. Use a tela de gerenciamento de usuários.
+                                    </small>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="filialId" class="form-label">Filial</label>
+                                    <select id="filialId" class="form-select" th:field="*{filialId}">
+                                        <option th:each="f : ${filiais}" th:value="${f.id}" th:text="${f.nome}"></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <div class="d-flex justify-content-end">
+                                <a th:href="@{/usuarios/perfil}" class="btn btn-secondary me-2">Cancelar</a>
+                                <button type="submit" class="btn btn-mottu">Salvar Alterações</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</th:block>
+
+</html>

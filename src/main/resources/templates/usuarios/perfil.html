@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/_layout :: layout(title='Meu Perfil', content=~{::content}, pageScripts=~{})}">
+
+<th:block th:fragment="content">
+    <main class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <h1 class="display-5 fw-bold mb-4">Meu Perfil</h1>
+
+                <div th:if="${successMessage}" class="alert alert-mottu-success" role="alert" th:text="${successMessage}"></div>
+                <div th:if="${errorMessage}" class="alert alert-mottu-error" role="alert" th:text="${errorMessage}"></div>
+
+                <div class="card-custom">
+                    <div class="card-body p-4">
+                        <dl class="row">
+                            <dt class="col-sm-4">Nome de Usuário</dt>
+                            <dd class="col-sm-8" th:text="${usuario.nome}"></dd>
+
+                            <dt class="col-sm-4">Perfil</dt>
+                            <dd class="col-sm-8"><span class="badge bg-success" th:text="${usuario.tipoPerfil == 1 ? 'ADMIN' : 'USER'}"></span></dd>
+
+                            <dt class="col-sm-4">Filial</dt>
+                            <dd class="col-sm-8" th:text="${usuario.filial.nome}"></dd>
+                        </dl>
+                        <hr>
+                        <div class="d-flex justify-content-end">
+                            <a th:href="@{/usuarios/{id}/editar(id=${usuario.id})}" class="btn btn-outline-warning me-2">
+                                <i class="bi bi-pencil-fill"></i> Editar Perfil
+                            </a>
+                            <form th:action="@{/usuarios/{id}/deletar(id=${usuario.id})}" method="post">
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Atenção! Sua conta será deletada permanentemente. Você será desconectado. Deseja continuar?')">
+                                    <i class="bi bi-trash-fill"></i> Deletar Conta
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</th:block>
+</html>

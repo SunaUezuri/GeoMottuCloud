@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/_layout :: layout(title='Acesso Negado', content=~{::content}, pageScripts=~{})}">
+
+<th:block th:fragment="content">
+    <main class="container flex-grow-1 d-flex align-items-center justify-content-center text-center">
+        <div>
+            <h1 class="display-1 fw-bold" style="color: var(--mottu-green);">403</h1>
+            <h2 class="display-4">Acesso Negado</h2>
+            <p class="lead">
+                Você não tem permissão para acessar esta página.
+            </p>
+            <a th:href="@{/}" class="btn btn-mottu mt-3">Voltar para a Página Inicial</a>
+        </div>
+    </main>
+</th:block>
+</html>

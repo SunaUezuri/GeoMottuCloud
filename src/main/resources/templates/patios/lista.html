@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/_layout :: layout(title='Lista de Pátios', content=~{::content}, pageScripts=~{})}">
+
+<th:block th:fragment="content">
+    <main class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="display-5 fw-bold">Gerenciamento de Pátios</h1>
+            <a th:href="@{/patios/novo}" class="btn btn-mottu"><i class="bi bi-plus-circle-fill me-2"></i>Novo Pátio</a>
+        </div>
+
+        <div th:if="${successMessage}" class="alert alert-mottu-success" role="alert" th:text="${successMessage}"></div>
+        <div th:if="${errorMessage}" class="alert alert-mottu-error" role="alert" th:text="${errorMessage}"></div>
+
+        <div class="card-custom">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped table-hover align-middle">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th class="text-center">Capacidade</th>
+                            <th class="text-center">Ocupação</th>
+                            <th sec:authorize="hasRole('ADMIN')">Filial</th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="patio : ${patios}">
+                            <td th:text="${patio.id}">1</td>
+                            <td th:text="${patio.nome}">Pátio Central</td>
+                            <td class="text-center" th:text="${patio.capacidadeTotal}">250</td>
+                            <td class="text-center">
+                                <span th:text="${#lists.size(patio.motos)}"></span> /
+                                <span th:text="${patio.capacidadeTotal}"></span>
+                            </td>
+                            <td sec:authorize="hasRole('ADMIN')" th:text="${patio.filial.nome}">Mottu SP</td>
+                            <td class="text-center">
+                                <div class="btn-group" role="group">
+                                    <a th:href="@{/patios/{id}/editar(id=${patio.id})}" class="btn btn-sm btn-outline-warning">
+                                        <i class="bi bi-pencil-fill"></i> Editar
+                                    </a>
+                                    <form th:action="@{/patios/{id}/deletar(id=${patio.id})}" method="post" class="d-inline" sec:authorize="hasRole('ADMIN')">
+                                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                        <button type="submit" class="btn btn-sm btn-outline-danger"
+                                                onclick="return confirm('Tem certeza que deseja deletar este pátio? Todas as motos neste pátio serão removidas.')">
+                                            <i class="bi bi-trash-fill"></i> Deletar
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(patios)}">
+                            <td colspan="6" class="text-center">Nenhum pátio cadastrado.</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+</th:block>
+</html>

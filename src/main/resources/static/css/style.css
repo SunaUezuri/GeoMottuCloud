@@ -1,0 +1,100 @@
+/* Definição de Variáveis de Cor */
+:root {
+    --mottu-green: #9dff00;
+    --mottu-dark: #1a1a1a;
+    --mottu-gray: #333;
+    --bs-body-color: #f8f9fa;
+    --bs-body-bg: var(--mottu-dark);
+}
+
+/* Estilo do corpo da página */
+body {
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+}
+
+
+/* Cartões */
+.card-custom {
+    background-color: var(--mottu-gray);
+    border: 1px solid var(--mottu-green);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.card-custom:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(157, 255, 0, 0.2);
+}
+.card-custom .card-header {
+    background-color: var(--mottu-dark);
+    border-bottom: 1px solid var(--mottu-green);
+    color: var(--mottu-green);
+}
+
+/* Botões */
+.btn-mottu {
+    background-color: var(--mottu-green);
+    color: var(--mottu-dark);
+    font-weight: bold;
+    border: 1px solid var(--mottu-green);
+    transition: all 0.2s ease;
+}
+.btn-mottu:hover {
+    background-color: #89dd00;
+    color: #000;
+    border-color: #89dd00;
+}
+
+.btn-outline-mottu {
+    color: var(--mottu-green);
+    border-color: var(--mottu-green);
+    font-weight: bold;
+}
+.btn-outline-mottu:hover {
+    background-color: var(--mottu-green);
+    color: var(--mottu-dark);
+    border-color: var(--mottu-green);
+}
+
+/* Formulários */
+.form-control {
+    background-color: var(--mottu-gray);
+    border: 1px solid #555;
+    color: var(--bs-body-color);
+}
+.form-control:focus {
+    background-color: var(--mottu-gray);
+    border-color: var(--mottu-green);
+    color: var(--bs-body-color);
+    box-shadow: 0 0 0 0.25rem rgba(157, 255, 0, 0.25);
+}
+.form-select {
+    background-color: var(--mottu-gray);
+    border: 1px solid #555;
+    color: var(--bs-body-color);
+}
+.form-label {
+    color: var(--mottu-green);
+}
+
+/* Navbar */
+.navbar-brand {
+    color: var(--mottu-green) !important;
+}
+.nav-link {
+    transition: color 0.2s;
+}
+.nav-link:hover {
+    color: var(--mottu-green) !important;
+}
+
+/* Alertas */
+.alert-mottu-success {
+    background-color: #2a3a2b;
+    color: #a3e635;
+    border: 1px solid #a3e635;
+}
+.alert-mottu-error {
+    background-color: #4d2d2d;
+    color: #ff8c8c;
+    border: 1px solid #ff8c8c;
+}

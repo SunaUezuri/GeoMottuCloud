@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/_layout :: layout(title=${motoId != null ? 'Editar Moto' : 'Nova Moto'}, content=~{::content}, pageScripts=~{})}">
+
+<th:block th:fragment="content">
+    <main class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="d-flex align-items-center mb-4">
+                    <a th:href="@{/motos}" class="btn btn-outline-mottu me-3"><i class="bi bi-arrow-left"></i></a>
+                    <h1 class="display-5 fw-bold mb-0" th:text="${motoId != null ? 'Editar Moto' : 'Nova Moto'}"></h1>
+                </div>
+
+                <div th:if="${errorMessage}" class="alert alert-mottu-error" role="alert" th:text="${errorMessage}"></div>
+
+                <div class="card-custom">
+                    <div class="card-body p-4">
+                        <form th:action="${motoId != null ? '/motos/' + motoId + '/editar' : '/motos/nova'}"
+                              th:object="${motoDto}" method="post">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="placa" class="form-label">Placa</label>
+                                    <input type="text" class="form-control" id="placa" th:field="*{placa}" required>
+                                    <div class="text-danger small mt-1" th:if="${#fields.hasErrors('placa')}" th:errors="*{placa}"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="chassi" class="form-label">Chassi</label>
+                                    <input type="text" class="form-control" id="chassi" th:field="*{chassi}" required>
+                                    <div class="text-danger small mt-1" th:if="${#fields.hasErrors('chassi')}" th:errors="*{chassi}"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="tipoMoto" class="form-label">Modelo da Moto</label>
+                                    <select id="tipoMoto" class="form-select" th:field="*{tipoMoto}" required>
+                                        <option value="" disabled>Selecione...</option>
+                                        <option th:each="tipo : ${T(br.com.geomottu.api.model.enums.TipoMoto).values()}"
+                                                th:value="${tipo}" th:text="${tipo}"></option>
+                                    </select>
+                                    <div class="text-danger small mt-1" th:if="${#fields.hasErrors('tipoMoto')}" th:errors="*{tipoMoto}"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="estadoMoto" class="form-label">Status Operacional</label>
+                                    <select id="estadoMoto" class="form-select" th:field="*{estadoMoto}" required>
+                                        <option value="" disabled>Selecione...</option>
+                                        <option th:each="estado : ${T(br.com.geomottu.api.model.enums.EstadoMoto).values()}"
+                                                th:value="${estado}" th:text="${estado}"></option>
+                                    </select>
+                                    <div class="text-danger small mt-1" th:if="${#fields.hasErrors('estadoMoto')}" th:errors="*{estadoMoto}"></div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="patioId" class="form-label">Pátio</label>
+                                    <select id="patioId" class="form-select" th:field="*{patioId}" required>
+                                        <option value="" disabled>Selecione o pátio...</option>
+                                        <option th:each="patio : ${patios}"
+                                                th:value="${patio.id}"
+                                                th:text="${patio.nome} + ' (' + ${patio.filial.nome} + ')'"></option>
+                                    </select>
+                                    <div class="text-danger small mt-1" th:if="${#fields.hasErrors('patioId')}" th:errors="*{patioId}"></div>
+                                </div>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <div class="d-flex justify-content-end">
+                                <a th:href="@{/motos}" class="btn btn-secondary me-2">Cancelar</a>
+                                <button type="submit" class="btn btn-mottu">Salvar Moto</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</th:block>
+
+</html>

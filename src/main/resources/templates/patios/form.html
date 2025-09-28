@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/_layout :: layout(title=${patioId != null ? 'Editar Pátio' : 'Novo Pátio'}, content=~{::content}, pageScripts=~{})}">
+
+<th:block th:fragment="content">
+    <main class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="d-flex align-items-center mb-4">
+                    <a th:href="@{/patios}" class="btn btn-outline-mottu me-3"><i class="bi bi-arrow-left"></i></a>
+                    <h1 class="display-5 fw-bold mb-0" th:text="${patioId != null ? 'Editar Pátio' : 'Novo Pátio'}"></h1>
+                </div>
+
+                <div class="card-custom">
+                    <div class="card-body p-4">
+                        <form th:action="${patioId != null ? '/patios/' + patioId + '/editar' : '/patios/novo'}"
+                              th:object="${patioDto}" method="post">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome do Pátio</label>
+                                <input type="text" class="form-control" id="nome" th:field="*{nome}" required>
+                                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="capacidadeTotal" class="form-label">Capacidade Total de Motos</label>
+                                <input type="number" class="form-control" id="capacidadeTotal" th:field="*{capacidadeTotal}" required min="1">
+                                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('capacidadeTotal')}" th:errors="*{capacidadeTotal}"></div>
+                            </div>
+
+                            <div class="mb-3" sec:authorize="hasRole('ADMIN')">
+                                <label for="filialId" class="form-label">Filial</label>
+                                <select id="filialId" class="form-select" th:field="*{filialId}" required>
+                                    <option value="" disabled>Selecione a filial...</option>
+                                    <option th:each="filial : ${filiais}"
+                                            th:value="${filial.id}"
+                                            th:text="${filial.nome}"></option>
+                                </select>
+                                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('filialId')}" th:errors="*{filialId}"></div>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <div class="d-flex justify-content-end">
+                                <a th:href="@{/patios}" class="btn btn-secondary me-2">Cancelar</a>
+                                <button type="submit" class="btn btn-mottu">Salvar Pátio</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</th:block>
+</html>

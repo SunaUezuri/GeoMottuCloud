@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/_layout :: layout(title=${filialId != null ? 'Editar Filial' : 'Nova Filial'}, content=~{::content}, pageScripts=~{})}">
+
+<th:block th:fragment="content">
+    <main class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="d-flex align-items-center mb-4">
+                    <a th:href="@{/filiais}" class="btn btn-outline-mottu me-3"><i class="bi bi-arrow-left"></i></a>
+                    <h1 class="display-5 fw-bold mb-0" th:text="${filialId != null ? 'Editar Filial' : 'Nova Filial'}"></h1>
+                </div>
+
+                <div class="card-custom">
+                    <div class="card-body p-4">
+                        <form th:action="${filialId != null ? '/filiais/' + filialId + '/editar' : '/filiais/nova'}"
+                              th:object="${filialDto}" method="post">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="nome" class="form-label">Nome da Filial</label>
+                                    <input type="text" class="form-control" id="nome" th:field="*{nome}" required>
+                                    <div class="text-danger small mt-1" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="pais" class="form-label">País</label>
+                                    <select id="pais" class="form-select" th:field="*{pais}" required>
+                                        <option value="" disabled>Selecione...</option>
+                                        <option th:each="p : ${T(br.com.geomottu.api.model.enums.PaisesFilial).values()}"
+                                                th:value="${p}" th:text="${p}"></option>
+                                    </select>
+                                    <div class="text-danger small mt-1" th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}"></div>
+                                </div>
+
+                                <h5 class="mt-4" style="color: var(--mottu-green)">Endereço</h5>
+                                <div class="col-md-9">
+                                    <label for="estado" class="form-label">Estado</label>
+                                    <input type="text" class="form-control" id="estado" th:field="*{endereco.estado}" required>
+                                    <div class="text-danger small mt-1" th:if="${#fields.hasErrors('endereco.estado')}" th:errors="*{endereco.estado}"></div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="siglaEstado" class="form-label">Sigla</label>
+                                    <input type="text" class="form-control" id="siglaEstado" th:field="*{endereco.siglaEstado}" required maxlength="2">
+                                    <div class="text-danger small mt-1" th:if="${#fields.hasErrors('endereco.siglaEstado')}" th:errors="*{endereco.siglaEstado}"></div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="cidade" class="form-label">Cidade</label>
+                                    <input type="text" class="form-control" id="cidade" th:field="*{endereco.cidade}" required>
+                                    <div class="text-danger small mt-1" th:if="${#fields.hasErrors('endereco.cidade')}" th:errors="*{endereco.cidade}"></div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="rua" class="form-label">Rua / Logradouro</label>
+                                    <input type="text" class="form-control" id="rua" th:field="*{endereco.rua}" required>
+                                    <div class="text-danger small mt-1" th:if="${#fields.hasErrors('endereco.rua')}" th:errors="*{endereco.rua}"></div>
+                                </div>
+
+                                <h5 class="mt-4" style="color: var(--mottu-green)">Contato</h5>
+                                <div class="col-md-6">
+                                    <label for="telefone" class="form-label">Telefone</label>
+                                    <input type="text" class="form-control" id="telefone" th:field="*{telefone}">
+                                    <div class="text-danger small mt-1" th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" th:field="*{email}">
+                                    <div class="text-danger small mt-1" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                                </div>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <div class="d-flex justify-content-end">
+                                <a th:href="@{/filiais}" class="btn btn-secondary me-2">Cancelar</a>
+                                <button type="submit" class="btn btn-mottu">Salvar Filial</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</th:block>
+
+</html>
