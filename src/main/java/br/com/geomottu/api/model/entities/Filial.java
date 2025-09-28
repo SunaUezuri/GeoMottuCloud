@@ -16,11 +16,10 @@ import java.util.Objects;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@SequenceGenerator(name = "filial", sequenceName = "SQ_T_GEOMOTTU_FILIAL", allocationSize = 1)
 public class Filial {
 
     @Id @Column(name = "id_filial")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "filial")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "nm_filial", nullable = false)

@@ -14,11 +14,10 @@ import lombok.Setter;
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@SequenceGenerator(name = "moto", sequenceName = "SQ_T_GEOMOTTU_MOTO", allocationSize = 1)
 public class Moto {
 
     @Id @Column(name = "id_moto")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "moto")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "nr_placa", length = 8, unique = true)

@@ -11,7 +11,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "T_GEOMOTTU_PATIO")
-@SequenceGenerator(name = "patio", sequenceName = "SQ_T_GEOMOTTU_PATIO", allocationSize = 1)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
@@ -19,7 +18,7 @@ public class Patio {
 
     @Id
     @Column(name = "id_patio")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "patio")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "nm_patio", length = 50)

@@ -15,7 +15,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "T_GEOMOTTU_USUARIO")
-@SequenceGenerator(name = "user", sequenceName = "SQ_T_GEOMOTTU_USUARIO", allocationSize = 1)
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,7 +22,7 @@ public class Usuario implements UserDetails {
 
     @Id
     @Column(name = "id_usuario")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "nm_usuario", unique = true, nullable = false, length = 25)
