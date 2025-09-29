@@ -1,6 +1,6 @@
 -- Criação da tabela
 CREATE TABLE T_GEOMOTTU_FILIAL (
-    id_filial BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_filial BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
     nm_filial VARCHAR(255) NOT NULL,
     pais_filial VARCHAR(255) NOT NULL,
     nm_telefone VARCHAR(20),

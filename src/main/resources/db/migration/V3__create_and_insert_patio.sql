@@ -1,5 +1,5 @@
 CREATE TABLE T_GEOMOTTU_PATIO (
-    id_patio BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_patio BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
     nm_patio VARCHAR(50),
     nr_capacidade INT NOT NULL,
     id_filial BIGINT,
