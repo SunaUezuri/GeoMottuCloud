@@ -34,9 +34,10 @@
 4.  [Detalhes de Segurança](#-detalhes-de-segurança)
 5.  [Tecnologias Utilizadas](#️-tecnologias-utilizadas)
 6.  [Como Executar Localmente](#-como-executar-localmente)
-7.  [Credenciais de Acesso](#-credenciais-de-acesso)
-8. [Próximos Passos (Roadmap)](#-próximos-passos-roadmap)
-9. [Links](#-links)
+7.  [Deploy na Azure com CLI](#-deploy-na-azure-com-cli)
+8.  [Credenciais de Acesso](#-credenciais-de-acesso)
+9. [Próximos Passos (Roadmap)](#-próximos-passos-roadmap)
+10. [Links](#-links)
 
 ---
 
