@@ -77,7 +77,7 @@ az webapp config appsettings set \
     SPRING_DATASOURCE_URL="$JDBC_URL" \
     SPRING_DATASOURCE_USERNAME="$DB_ADMIN_USER" \
     SPRING_DATASOURCE_PASSWORD="$DB_ADMIN_PASSWORD" \
-    SPRING_JPA_HIBERNATE_DDL_AUTO="validate"
+    SPRING_JPA_HIBERNATE_DDL_AUTO="none"
 
 echo "--> Compilando o projeto Java (lembre-se de ajustar o pom.xml)..."
 mvn clean package -DskipTests
