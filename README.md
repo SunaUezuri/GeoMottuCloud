@@ -3,7 +3,7 @@
 ![Status: Concluído](https://img.shields.io/badge/status-concluído-green)
 ![Java](https://img.shields.io/badge/Java-21-blue?logo=openjdk)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-green?logo=spring)
-![Oracle DB](https://img.shields.io/badge/Oracle-Database-red?logo=oracle)
+![Azure SQL](https://img.shields.io/badge/Azure-SQL-blue?logo=azuresqldatabase)
 ![Thymeleaf](https://img.shields.io/badge/Thymeleaf-Frontend-green?logo=thymeleaf)
 
 
