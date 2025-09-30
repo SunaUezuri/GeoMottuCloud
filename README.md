@@ -161,7 +161,7 @@ Esta seção detalha como provisionar toda a infraestrutura na Azure e fazer o d
 Antes de executar o script, você precisa preparar seu ambiente:
 
 1. **Instalar a Azure CLI:** A Interface de Linha de Comando da Azure é a ferramenta principal para gerenciar recursos. Se você ainda não a tem, instale-a seguindo as instruções oficiais.
-2. **Fazer Login na sua Conta:** Abra seu terminal e execute o comando abaixo. Uma janela do navegador será aberta para você se autenticar.
+2. **Fazer Login na sua Conta:** Abra seu terminal bash e execute o comando abaixo. Uma janela do navegador será aberta para você se autenticar.
 
     ```bash
         az login
@@ -178,7 +178,16 @@ Antes de executar o script, você precisa preparar seu ambiente:
      ```bash
         az account set --subscription "NOME_OU_ID_DA_SUA_ASSINATURA"
      ```
-Com o ambiente configurado, você está pronto para usar o script de deploy.
+4. **Dar Permissão Para o Arquivo.**: Dê permissões para o arquivo `deploy_azure.sh` para poder ser executado:
+
+    ```bash
+        chmod +X deploy_azure.sh
+    ```
+Com o ambiente configurado, você está pronto para usar o script de deploy com o comando:.
+
+```bash
+    ./deploy_azure.sh
+```
 
 ### Script de Deploy Automatizado
 
