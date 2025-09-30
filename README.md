@@ -12,6 +12,12 @@
 
 ---
 
+## Benefícios
+
+A **Geomottu** traz consigo praticidade e agilidade no controle e localização de motos, além de ser protegida com criptografias e permissões de usuário, ela é de uso simples visando fácil controle do fluxo de trabalho da empresa em relação a localização e controle de sua frota.
+
+---
+
 ## 🧑‍💻 Autores
 
 <div align="center">
