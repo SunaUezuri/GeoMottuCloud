@@ -353,3 +353,4 @@ O projeto está pronto para ser expandido com novas funcionalidades:
 ## 🔗 Links
 
 [![Deploy Online](https://img.shields.io/badge/🌍%20Abrir%20Aplicação-000?style=for-the-badge&logo=vercel)](https://geomottujava.onrender.com)
+[![Vídeo de Demonstração](https://img.shields.io/badge/▶️%20Ver%20Demonstração-FF0000?style=for-the-badge&logo=youtube)](https://youtu.be/I2BNlVigz2I) 
