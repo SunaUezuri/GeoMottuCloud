@@ -8,13 +8,23 @@
 
 
 
-**GeoMottu** é uma aplicação web full-stack desenvolvida para simular um sistema de gerenciamento de frotas de motocicletas para a empresa Mottu, com foco em posteriormente adicionar o mapa para mostrar as motos.
+O **GeoMottu** é uma aplicação web completa (full-stack) desenvolvida para simular um sistema robusto de gerenciamento de frotas de motocicletas. Seu principal objetivo é atender às necessidades da empresa Mottu, oferecendo uma plataforma centralizada para o controle logístico e operacional de sua frota. 
+
+A aplicação é construída em `Java 21` utilizando o framework `Spring Boot 3`, com uma interface de usuário renderizada no servidor via `Thymeleaf`. Para persistência de dados, emprega Spring Data JPA e `Azure SQL Database`, com migrações de schema gerenciadas por `Flyway`. A segurança é um pilar central, implementada com `Spring Security` para autenticação e autorização baseadas em perfis (ADMIN e USER). 
 
 ---
 
 ## Benefícios
 
-A **Geomottu** traz consigo praticidade e agilidade no controle e localização de motos, além de ser protegida com criptografias e permissões de usuário, ela é de uso simples visando fácil controle do fluxo de trabalho da empresa em relação a localização e controle de sua frota.
+* **Centralização da Informação:** Consolida dados cruciais de filiais, pátios e frotas em uma única plataforma, proporcionando uma visão unificada e em tempo real da operação. 
+
+* **Controle Eficiente de Inventário:** Permite o rastreamento preciso de cada motocicleta, seu status operacional (Livre, Alugada, Manutenção) e localização (pátio atual), otimizando a alocação de recursos e a programação de manutenções. 
+
+* **Segurança e Segregação de Acesso:** Implementação robusta de Spring Security, garantindo que cada usuário acesse apenas as informações e funcionalidades pertinentes ao seu perfil e filial, protegendo dados sensíveis e prevenindo acessos indevidos. 
+
+* **Tomada de Decisão Baseada em Dados:** O dashboard administrativo fornece insights rápidos e visualmente intuitivos sobre a saúde da frota, como a distribuição de motos por status, tipo e a taxa de ocupação dos pátios, auxiliando gestores na tomada de decisões estratégicas. 
+
+* **Escalabilidade e Robustez na Nuvem:** A implantação na Azure, utilizando App Services e Azure SQL Database (Serverless), garante que a aplicação seja escalável e resiliente, pronta para crescer com a demanda da Mottu, com otimização de custos em períodos de baixa utilização. 
 
 ---
 
