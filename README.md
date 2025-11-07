@@ -141,6 +141,14 @@ A segurança é um pilar central da aplicação, implementada com Spring Securit
 * **Flyway** (Versionamento de Banco de Dados)
 * **Maven** (Gerenciamento de Dependências)
 
+| Componente | Tipo | Descrição Funcional | Tecnologia/Ferramenta |
+| :--- | :--- | :--- | :--- |
+| Repositório Git | SCM | Local de versionamento do código | GitHub |
+| Pipeline CI | Orquestrador CI | Compila o projeto e executa os testes automáticos | Azure Devops Pipelines |
+| Pipeline CD | Orquestrador CD | Deploy automatizado da aplicação | Azure Devops Pipelines |
+| Banco Azure SQL Server | PaaS | Armazenamento dos dados da aplicação | Azure SQL |
+| GeoMottuWebApp | Runtime | Local onde a aplicação roda | Azure Web App |
+
 ---
 
 ## 🚀 Como Executar Localmente
@@ -291,24 +299,6 @@ O script a seguir cria todos os recursos necessários (Grupo de Recursos, Banco 
         SPRING_DATASOURCE_PASSWORD="$DB_ADMIN_PASSWORD" \
         SPRING_JPA_HIBERNATE_DDL_AUTO="none"
     
-    echo "--> Compilando o projeto Java (lembre-se de ajustar o pom.xml)..."
-    mvn clean package -DskipTests
-    
-    echo "--> Procurando arquivo .jar gerado..."
-    JAR_FILE=$(ls target/*.jar | head -n 1)
-    if [ -z "$JAR_FILE" ]; then
-        echo "❌ Nenhum arquivo JAR encontrado."
-        exit 1
-    fi
-    echo "--> Arquivo JAR encontrado: $JAR_FILE"
-    
-    echo "--> Fazendo o deploy do arquivo .jar..."
-    az webapp deploy \
-        --name $WEB_APP_NAME \
-        --resource-group $RESOURCE_GROUP \
-        --type jar \
-        --src-path "$JAR_FILE"
-    
     echo "### ✅ Deploy concluído com sucesso! ###"
     echo "🌐 Acesse sua aplicação em: http://${WEB_APP_NAME}.azurewebsites.net"
 ```
@@ -324,9 +314,7 @@ O script a seguir cria todos os recursos necessários (Grupo de Recursos, Banco 
 7. `az appservice plan create`: Cria um Plano do App Service, que define a capacidade computacional (CPU, memória) para a nossa aplicação. O SKU S1 (Standard) é uma boa escolha para produção, oferecendo recursos dedicados.
 8. `az webapp create`: Cria a aplicação web (Web App) onde o nosso código Java será executado. Especificamos o runtime `JAVA|21-java21` para garantir a compatibilidade.
 9. `az webapp config appsettings set`: Este é um passo crucial. Ele configura as variáveis de ambiente para a aplicação web. O Spring Boot automaticamente detecta essas variáveis (SPRING_DATASOURCE_URL, etc.) e as utiliza para configurar a conexão com o banco de dados, sobrescrevendo o `application.properties`.
-10. `mvn clean package`: Executa o build do projeto Maven, compilando o código e empacotando-o em um arquivo `.jar` executável na pasta `target/`.
-11. **Localização do JAR**: O script localiza o arquivo `.jar` recém-criado na pasta `target`.
-12. `az webapp deploy`: O comando final que envia o arquivo `.jar` para o Azure App Service, publicando a aplicação e tornando-a acessível na web.
+10. O deploy é feito de maneira automatizada por pipelines no azure devops.
 
 ---
 
@@ -353,4 +341,5 @@ O projeto está pronto para ser expandido com novas funcionalidades:
 ## 🔗 Links
 
 [![Deploy Online](https://img.shields.io/badge/🌍%20Abrir%20Aplicação-000?style=for-the-badge&logo=vercel)](https://geomottujava.onrender.com)
+[![Azure Boards](https://img.shields.io/badge/Azure-SQL-blue?logo=azuresqldatabase)](https://dev.azure.com/RM558043/GeoMottuWebApp)
 [![Vídeo de Demonstração](https://img.shields.io/badge/▶️%20Ver%20Demonstração-FF0000?style=for-the-badge&logo=youtube)](https://youtu.be/I2BNlVigz2I) 
