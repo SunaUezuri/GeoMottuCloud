@@ -79,23 +79,5 @@ az webapp config appsettings set \
     SPRING_DATASOURCE_PASSWORD="$DB_ADMIN_PASSWORD" \
     SPRING_JPA_HIBERNATE_DDL_AUTO="none"
 
-echo "--> Compilando o projeto Java (lembre-se de ajustar o pom.xml)..."
-mvn clean package -DskipTests
-
-echo "--> Procurando arquivo .jar gerado..."
-JAR_FILE=$(ls target/*.jar | head -n 1)
-if [ -z "$JAR_FILE" ]; then
-    echo "❌ Nenhum arquivo JAR encontrado."
-    exit 1
-fi
-echo "--> Arquivo JAR encontrado: $JAR_FILE"
-
-echo "--> Fazendo o deploy do arquivo .jar..."
-az webapp deploy \
-    --name $WEB_APP_NAME \
-    --resource-group $RESOURCE_GROUP \
-    --type jar \
-    --src-path "$JAR_FILE"
-
 echo "### ✅ Deploy concluído com sucesso! ###"
 echo "🌐 Acesse sua aplicação em: http://${WEB_APP_NAME}.azurewebsites.net"
